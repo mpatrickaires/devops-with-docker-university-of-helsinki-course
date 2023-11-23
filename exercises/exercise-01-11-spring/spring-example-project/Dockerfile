@@ -5,7 +5,7 @@ FROM openjdk:8
 # From the project's README: "The project should open in `8080`". So, we'll expose the port 8080
 EXPOSE 8080
 
-# That's location is just a convention
+# That location is just a convention
 WORKDIR /usr/src/app
 
 # Copy all of the project's files.
