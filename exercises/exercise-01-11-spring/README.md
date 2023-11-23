@@ -10,3 +10,15 @@ You've completed the exercise when you see a 'Success' message in your browser.
 Submit the Dockerfile you used to run the container.
 
 [1]: spring-example-project/README.md
+
+## Solution
+
+Check the created [Dockerfile](spring-example-project/Dockerfile).
+
+Build the image from it:
+
+`docker build -t spring-example .`
+
+And run the container mapping a port from the host to the port 8080 of the container:
+
+`docker run --name spring-example -p 8080:8080 spring-example`
