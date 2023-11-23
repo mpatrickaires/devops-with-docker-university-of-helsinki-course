@@ -1,0 +1,6 @@
+FROM python:3.8
+# python:3.8 image has the default ENTRYPOINT as the bash and the CMD as "python3".
+# So, if we want to override that and have our container execute python directly when we run it, we have to change the ENTRYPOINT ourselves
+ENTRYPOINT ["python3"]
+# Then, we can set some default argument with CMD that will be passed to the python executable we set in the ENTRYPOINT
+CMD ["--help"]

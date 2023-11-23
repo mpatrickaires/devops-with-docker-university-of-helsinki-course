@@ -1,0 +1,18 @@
+FROM ubuntu:18.04
+
+WORKDIR /mydir
+
+RUN apt-get update && apt-get install -y curl python
+RUN curl -L https://github.com/ytdl-org/youtube-dl/releases/download/2021.12.17/youtube-dl -o /usr/local/bin/youtube-dl
+RUN chmod a+x /usr/local/bin/youtube-dl
+
+# Instead of using RUN export LC_ALL=C.UTF-8 we store the environment directly in the image with ENV
+ENV LC_ALL=C.UTF-8
+
+# We want the URL to be given as an argument, so we can't use the CMD, because the argument that is passed to the container will replace it
+# CMD ["/usr/local/bin/youtube-dl"]
+# So, we replace CMD with ENTRYPOINT, which will define the main executable and then Docker will combine our run arguments for it
+ENTRYPOINT ["/usr/local/bin/youtube-dl"]
+
+# Define a default argument. When CMD is used with ENTRYPOINT, the CMD will pass default arguments to the ENTRYPOINT
+CMD ["https://imgur.com/gallery/xwJgflf"]

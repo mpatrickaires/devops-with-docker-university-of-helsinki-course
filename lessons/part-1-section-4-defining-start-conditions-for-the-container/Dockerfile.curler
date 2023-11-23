@@ -11,4 +11,4 @@ WORKDIR /usr/src/app
 COPY curler.sh .
 
 # Run the script by default when the container is executed
-CMD ./curler.sh
+ENTRYPOINT ["./curler.sh"]
