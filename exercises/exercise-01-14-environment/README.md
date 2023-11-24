@@ -1,4 +1,5 @@
 # MANDATORY EXERCISE 1.14: ENVIRONMENT
+
 Start both frontend-example and backend-example with correct ports exposed and add ENV to Dockerfile with necessary information from both READMEs (front, back).
 
 Ignore the backend configurations until frontend sends requests to `_backend_url_/ping` when you press the button.

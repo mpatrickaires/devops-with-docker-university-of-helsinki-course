@@ -1,4 +1,5 @@
 # MANDATORY EXERCISE 1.12: HELLO, FRONTEND!
+
 A good developer creates well-written READMEs. Such that they can be used to create Dockerfiles with ease.
 
 Clone, fork or download the project from https://github.com/docker-hy/material-applications/tree/main/example-frontend.

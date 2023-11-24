@@ -1,4 +1,5 @@
 # EXERCISE 1.10: PORTS OPEN
+
 In this exercise, we won't create a new Dockerfile.
 
 The image `devopsdockeruh/simple-web-service` will start a web service in port `8080` when given the argument "server". In Exercise 1.8 you already did a image that can be used to run the web service without any argument.

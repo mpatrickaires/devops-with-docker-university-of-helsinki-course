@@ -1,4 +1,5 @@
 # EXERCISE 1.11: SPRING
+
 Create a Dockerfile for an old Java Spring project that can be found from the [course repository](https://github.com/docker-hy/material-applications/tree/main/spring-example-project).
 
 The setup should be straightforward with the [README][1] instructions. Tips to get you started:
