@@ -13,7 +13,7 @@ Do not alter the code of the project
 
 Check the created [Dockerfile](example-backend/Dockerfile).
 
-Build the image from it
+Build the image from it:
 
 `docker build -t example-backend .`
 
