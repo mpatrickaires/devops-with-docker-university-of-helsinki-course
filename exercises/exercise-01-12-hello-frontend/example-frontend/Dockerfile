@@ -14,7 +14,7 @@ WORKDIR /usr/src/app
 # - install: `npm install -g serve`
 # - serve: `serve -s -l 5000 build`"
 #
-# Since this is a dependency that will most likely not change and is not dependent in any of the project's source code, we'll install it before copying any of the source code so that its caching is more effect (i.e, if anything in the project's source code changes, this layer will not be affected).
+# Since this is a dependency that will most likely not change and is not dependent in any of the project's source code, we'll install it before copying any of the source code so that its caching is more effective (i.e, if anything in the project's source code changes, this layer will not be affected).
 RUN npm install -g serve
 
 
