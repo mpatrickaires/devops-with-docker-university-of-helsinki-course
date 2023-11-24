@@ -1,0 +1,14 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+
+ENV ASPNETCORE_URLS=http://*:5000
+EXPOSE 5000
+
+WORKDIR /usr/src/source
+
+COPY *.csproj .
+RUN dotnet restore
+
+COPY . .
+RUN dotnet publish -c Release -o app
+
+CMD ["dotnet", "app/DotnetApiExample.dll"]
