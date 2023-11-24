@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 
 # From the README: "Server accepts the following environment variables:
 # - REQUEST_ORIGIN to pass an url through the cors check. Default: https://example.com".
-#Sp, we'll set this environment variable value
+# So, we'll set this environment variable value.
 ENV REQUEST_ORIGIN=http://localhost:5000
 
 # From the README: "Run go build. It will generate a binary named "server"".
