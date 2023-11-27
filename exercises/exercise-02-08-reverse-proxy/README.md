@@ -62,7 +62,7 @@ services:
     #   - 5000:5000
 
   ...
-  
+
   example-backend:
     ...
     # No need to map the ports to the host, as we'll be connecting only via the reverse proxy.
@@ -100,7 +100,7 @@ Finally, we can add the reverse proxy service into the [docker-compose.yml](dock
 services:
   ...
   reverse-proxy:
-    image: nginx:
+    image: nginx:1.25.3-alpine
     ports:
       - 80:80
     volumes:
