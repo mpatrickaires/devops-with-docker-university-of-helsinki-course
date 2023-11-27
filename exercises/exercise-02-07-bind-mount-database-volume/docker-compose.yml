@@ -36,4 +36,7 @@ services:
       # The backend service assumes by default that the password is "postgres", so we'll use it here.
       # Regarding the other environment variables, from the Postgres image documentation (https://hub.docker.com/_/postgres/) it is mentioned that the POSTGRES_USER (user) defaults to "postgres", and that the POSTGRES_DB (default database name), if not specified, uses the value of POSTGRES_USER.
       - POSTGRES_PASSWORD=postgres
+    volumes:
+      # From Postgres' image documentation, the data files are written by default in /var/lib/postgresql/data (https://github.com/docker-library/docs/blob/master/postgres/README.md#where-to-store-data)
+      - ./database:/var/lib/postgresql/data
     container_name: db
