@@ -4,17 +4,13 @@ services:
   example-frontend:
     image: example-frontend
     build: ./example-frontend
-    # No need to map the ports to the host, as we'll be connecting only via the reverse proxy.
-    # ports:
-    #   - 5000:5000
+      - 5000:5000
     container_name: example-frontend
 
   example-backend:
     image: example-backend
     build: ./example-backend
-    # No need to map the ports to the host, as we'll be connecting only via the reverse proxy.
-    # ports:
-    #   - 8080:8080
+      - 8080:8080
     # From the README: "Server accepts the following environment variables:
     # - `POSTGRES_HOST` The hostname for postgres database. (port will default to 5432 the default for Postgres)
     # - `POSTGRES_USER` database user. Default: postgres

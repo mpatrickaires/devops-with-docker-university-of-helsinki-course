@@ -50,26 +50,6 @@ Submit the docker-compose.yml
 
 ## Solution
 
-First, in the [docker-compose.yml](docker-compose.yml) let's remove the mapping of the frontend and backend ports to the host machine, since we shouldn't communicate directly to them anymore, but through the reverse proxy:
-
-```yml
-services:
-  ...
-  example-frontend:
-    ...
-    # No need to map the ports to the host, as we'll be connecting only via the reverse proxy.
-    # ports:
-    #   - 5000:5000
-
-  ...
-
-  example-backend:
-    ...
-    # No need to map the ports to the host, as we'll be connecting only via the reverse proxy.
-    # ports:
-    #   - 8080:8080
-```
-
 We have to create `nginx.conf` file in our machine:
 
 `touch nginx.conf`
