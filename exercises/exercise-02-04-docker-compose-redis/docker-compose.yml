@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+    example-frontend:
+      image: example-frontend
+      build: ./example-frontend
+      ports:
+        - 5000:5000
+      container_name: example-frontend
+
+    example-backend:
+      image: example-backend
+      build: ./example-backend
+      ports:
+        - 8080:8080
+      container_name: example-backend
+
+    # From the notes about the exercise: "For example, in Exercise 2.4 we don't want to open ports to Redis to the outside world. Do not add a ports configuration under Redis! The backend will be able to access the application within the Docker network."
+    # So, there will be no ports configuration.
+    redis-cache:
+      image: redis:7.2.3
+      container_name: redis-cache
