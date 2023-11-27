@@ -30,6 +30,7 @@ services:
       restart: unless-stopped
       environment:
         # The backend service assumes by default that the password is "postgres", so we'll use it here.
+        # Regarding the other environment variables, from the Postgres image documentation (https://hub.docker.com/_/postgres/) it is mentioned that the POSTGRES_USER (user) defaults to "postgres", and that the POSTGRES_DB (default database name), if not specified, uses the value of POSTGRES_USER.
         - POSTGRES_PASSWORD=postgres
       container_name: db
 ```
