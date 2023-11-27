@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13.2-alpine
+    networks:
+      - database-network # Name in this Docker Compose file
+
+networks:
+  database-network: # Name in this Docker Compose file
+    name: database-network # Name that will be the actual name of the network

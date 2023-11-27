@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+    whoami:
+      image: jwilder/whoami
+      environment:
+        # nginx-proxy needs to know which service we want, and for that it's necessary to set two environment variables: VIRTUAL_HOST and VIRTUAL_PORT.
+        # VIRTUAL_PORT is not needed if the service has EXPOSE in it's Docker image, which, in this case, jwilder/whoami already has: https://github.com/jwilder/whoami/blob/master/Dockerfile#L9.
+        - VIRTUAL_HOST=whoami.colasloth.com
+    proxy:
+      image: jwilder/nginx-proxy
+      volumes:
+        - /var/run/docker.sock:/tmp/docker.sock:ro
+      ports:
+        - 80:80
+    hello:
+      image: nginx:1.19-alpine
+      volumes:
+        - ./hello.html:/usr/share/nginx/html/index.html:ro
+      environment:
+        - VIRTUAL_HOST=hello.colasloth.com
+    world:
+      image: nginx:1.19-alpine
+      volumes:
+        - ./world.html:/usr/share/nginx/html/index.html:ro
+      environment:
+        - VIRTUAL_HOST=world.colasloth.com
