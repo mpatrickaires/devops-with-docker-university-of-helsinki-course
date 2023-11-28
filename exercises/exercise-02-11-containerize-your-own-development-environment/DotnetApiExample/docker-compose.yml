@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  dotnet-api-example:
+    image: dotnet-api-example
+    build: .
+    # In development, the exposed port is 5077.
+    ports:
+      - 5077:5077
+    # Bind mount the source files to inside the container.
+    volumes:
+      - ./:/usr/src/app
+    container_name: dotnet-api-example
