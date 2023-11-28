@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  example-frontend:
+    image: example-frontend
+    build: 
+      context: ./example-frontend
+      args:
+        REACT_APP_BACKEND_URL: http://localhost/api
+    # All the access will be done through the reverse proxy, so there's no need anymore to map the ports to the host machine.
+    # ports:
+    #   - 5000:5000
+    container_name: example-frontend
+
+  example-backend:
+    image: example-backend
+    build: 
+      context: ./example-backend
+      args:
+        REQUEST_ORIGIN: http://localhost
+    # All the access will be done through the reverse proxy, so there's no need anymore to map the ports to the host machine.
+    # ports:
+    #   - 8080:8080
+    # From the README: "Server accepts the following environment variables:
+    # - `POSTGRES_HOST` The hostname for postgres database. (port will default to 5432 the default for Postgres)
+    # - `POSTGRES_USER` database user. Default: postgres
+    # - `POSTGRES_PASSWORD` database password. Default: postgres
+    # - `POSTGRES_DATABASE` database name. Default: postgres"
+    # We'll take advantage of the default values, so only POSTGRES_HOST needs to be set.
+    environment:
+      - POSTGRES_HOST=db
+    container_name: example-backend
+
+  # From the notes about the exercise: "For example, in Exercise 2.4 we don't want to open ports to Redis to the outside world. Do not add a ports configuration under Redis! The backend will be able to access the application within the Docker network."
+  # So, there will be no ports configuration.
+  redis-cache:
+    image: redis:7.2.3
+    container_name: redis-cache
+
+  db:
+    image: postgres:16.1-alpine
+    restart: unless-stopped
+    environment:
+      # The backend service assumes by default that the password is "postgres", so we'll use it here.
+      # Regarding the other environment variables, from the Postgres image documentation (https://hub.docker.com/_/postgres/) it is mentioned that the POSTGRES_USER (user) defaults to "postgres", and that the POSTGRES_DB (default database name), if not specified, uses the value of POSTGRES_USER.
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      # From Postgres' image documentation, the data files are written by default in /var/lib/postgresql/data (https://github.com/docker-library/docs/blob/master/postgres/README.md#where-to-store-data)
+      - ./database:/var/lib/postgresql/data
+    container_name: db
+
+  reverse-proxy:
+    image: nginx:1.25.3-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    container_name: reverse-proxy
