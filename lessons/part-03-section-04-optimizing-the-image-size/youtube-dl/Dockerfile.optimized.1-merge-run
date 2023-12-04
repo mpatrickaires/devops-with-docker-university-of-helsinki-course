@@ -1,0 +1,21 @@
+FROM ubuntu:18.04
+
+WORKDIR /usr/videos
+
+ENV LC_ALL=C.UTF-8
+
+# As was said each command that is executed to the base image, forms an layer. Command here refers to one Dockerfile directive such as RUN. We could now glue all RUN commands together to reduce the number of layers that are created when building the image:
+RUN apt-get update && apt-get install -y \
+    curl python && \
+    curl -L https://github.com/ytdl-org/youtube-dl/releases/download/2021.12.17/youtube-dl -o /usr/local/bin/youtube-dl && \
+    chmod a+x /usr/local/bin/youtube-dl && \
+    useradd -m appuser && \
+    chown appuser . && \
+    # The next step is to remove everything that is not needed in the final image. We don't need the apt source lists anymore, so we can glue the next line to our single RUN.
+    # We can optimize even further by removing the curl. We can remove curl and all the dependencies it installed with.
+    apt-get purge -y --auto-remove curl && \
+    rm -rf /var/lib/apt/lists/*
+
+USER appuser
+
+ENTRYPOINT ["/usr/local/bin/youtube-dl"]

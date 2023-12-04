@@ -1,0 +1,21 @@
+FROM alpine:3.13
+
+WORKDIR /usr/videos
+
+ENV LC_ALL=C.UTF-8
+
+# - The package manager is apk and it can work without downloading sources (caches) first with --no-cache.
+# - useradd is missing, but adduser exists.
+# - Most of the package names are the same - there's a good package browser at https://pkgs.alpinelinux.org/packages.
+# - The youtube-dl assumes that Python executable is called python. When we installed the version 3 of Python, the executable is called python3 and that is why the last line of the RUN directive makes a symbolic link so that both names can be user to run Python
+RUN apk add --no-cache curl python3 ca-certificates && \
+    curl -L https://github.com/ytdl-org/youtube-dl/releases/download/2021.12.17/youtube-dl -o /usr/local/bin/youtube-dl && \
+    chmod a+x /usr/local/bin/youtube-dl && \
+    apk del curl && \
+    adduser -D userapp && \
+    chown userapp . && \
+    ln -s /usr/bin/python3 /usr/bin/python
+
+USER userapp
+
+ENTRYPOINT ["/usr/local/bin/youtube-dl"]
