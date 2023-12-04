@@ -1,4 +1,5 @@
 # EXERCISE 3.7
+
 As you may have guessed, you shall now return back to the example frontend and backend.
 
 Change the base image in FROM to something more suitable. Both should have at least Alpine variants ready in DockerHub. Make sure the application still works after the changes.
