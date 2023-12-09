@@ -12,19 +12,19 @@ Check the [Dockerfile](example-frontend/Dockerfile).
 
 First, we'll name the build step, where we use the Node image:
 
-```docker
+```dockerfile
 FROM node:16-alpine AS build-stage
 ```
 
 Then, we can remove the `CMD` step, as we will not run it in this image anymore:
 
-```docker
+```dockerfile
 # CMD ["serve", "-s", "-l", "5000", "build"]
 ```
 
 Finally, we have to create a new stage which copies the resulting build from the previous stage. I've used nginx in this solution to serve the static files:
 
-```docker
+```dockerfile
 FROM nginx:1.25.3-alpine
 
 COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html

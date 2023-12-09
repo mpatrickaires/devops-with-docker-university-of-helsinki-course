@@ -14,13 +14,13 @@ To understand it better, it's important to know that there are two image variati
 
 So, we'll keep the first stage of the Dockerfile using the SDK image, let's just change it to the alpine variation and add a name to the stage:
 
-```docker
+```dockerfile
 FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
 ```
 
 After that, we remove the existing `ENV`, `EXPOSE` and `CMD` statements from this stage, as they'll be set in the final stage:
 
-```docker
+```dockerfile
 # ENV ASPNETCORE_URLS=http://*:5000
 # EXPOSE 5000
 ...
@@ -29,13 +29,13 @@ After that, we remove the existing `ENV`, `EXPOSE` and `CMD` statements from thi
 
 With all that done, we can start to create the final stage, using the runtime variation of the .NET image:
 
-```docker
+```dockerfile
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine as final
 ```
 
 Let's set the port and expose it:
 
-```docker
+```dockerfile
 ENV ASPNETCORE_URLS=http://*:5000
 EXPOSE 5000
 ```
@@ -50,7 +50,7 @@ COPY --from=build /usr/src/app/bin .
 
 For the security concern, let's set a new user so that the container doesn't run with root:
 
-```docker
+```dockerfile
 RUN adduser -D appuser
 RUN chown appuser .
 USER appuser
@@ -58,7 +58,7 @@ USER appuser
 
 Finally, we can set it to run the application:
 
-```docker
+```dockerfile
 CMD ["dotnet", "DotnetApiExample.dll"]
 ```
 

@@ -12,7 +12,7 @@ Document the size before and after your changes.
 
 Change the base image to an Alpine variant in the [Dockerfile](example-backend/Dockerfile):
 
-```docker
+```dockerfile
 FROM node:16-alpine
 ```
 
@@ -28,7 +28,7 @@ Image size: 477MB
 
 Change the base image to an Alpine variant in the [Dockerfile](example-frontend/Dockerfile):
 
-```docker
+```dockerfile
 FROM golang:1.16-alpine
 ```
 

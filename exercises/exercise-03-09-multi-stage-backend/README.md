@@ -12,25 +12,25 @@ Check the [Dockerfile](example-backend/Dockerfile).
 
 First, lest give a name to the initial build step:
 
-```docker
+```dockerfile
 FROM golang:1.16-alpine as build
 ```
 
 we have to [turn off CGO during the build phase](https://stackoverflow.com/a/55106860/19109739), so we have to change the `RUN` statement:
 
-```docker
+```dockerfile
 RUN CGO_ENABLED=0 go build
 ```
 
 Then, we can remove the `CMD` we had before:
 
-```docker
+```dockerfile
 # CMD ["./server"]
 ```
 
 Finally, we set a new stage with scratch as the base image and copy the binary generated in the build stage:
 
-```docker
+```dockerfile
 FROM scratch
 COPY --from=build /usr/src/app/server .
 CMD ["/server"]

@@ -16,7 +16,7 @@ Add the following instruction to the Dockerfiles of both [frontend](example-fron
 
 > Note: I didn't have a problem with the command `useradd` in the backend image that is based on Alpine Linux, so I used it normally.
 
-```docker
+```dockerfile
 # Creating a user so that we start the process as a non-root user.
 RUN useradd -m appuser
 ```

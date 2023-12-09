@@ -12,7 +12,7 @@ After your improvements document the image sizes again. The size difference may 
 
 Merge the `RUN` statements and remove the the apt source lists:
 
-```docker
+```dockerfile
 RUN npm install && \
   npm run build && \
   npm install -g serve && \
@@ -47,7 +47,7 @@ RUN /bin/sh -c npm install &&   npm run buil…   359MB
 
 Merge the `RUN` statements and remove the the apt source lists:
 
-```docker
+```dockerfile
 RUN go build && \ 
   useradd -m appuser && \
   rm -rf /var/lib/apt/lists/* && \
